@@ -1,5 +1,6 @@
 nginx:
-  image: nginx:1.10.1
+#  image: nginx:latest
+  build: ./docker/nginx
   volumes:
     - ./docker/nginx/conf.d:/etc/nginx/conf.d
     - ./var/nginx-log/:/var/log/nginx
@@ -9,6 +10,7 @@ nginx:
     - php:php
   ports:
     - 80
+    - 443
   environment:
     SERVICE_80_NAME: website
     SERVICE_TAGS: production

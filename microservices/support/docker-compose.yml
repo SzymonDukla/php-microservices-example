@@ -1,6 +1,7 @@
 consul:
-  command: -server -bootstrap docker
+  command: -client 0.0.0.0 -server -bootstrap docker
   image: progrium/consul:latest
+#  image: consul:latest
   ports:
     - 8400:8400
     - 8500:8500
@@ -21,7 +22,13 @@ lb:
   links:
     - consul
   ports:
+    - 8080:80
     - 80:80
+    - 443:443
+  expose:
+    - 8080 
+    - 80
+    - 443
   environment:
     CONSUL_URL: consul:8500
     SERVICE_80_NAME: lb
